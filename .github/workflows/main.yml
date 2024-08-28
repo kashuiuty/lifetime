@@ -1,0 +1,35 @@
+name: Create RDP Instance
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_rdp:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Cloud Provider CLI
+      run: |
+        # Install your required cloud provider CLI (e.g., AWS CLI, Azure CLI)
+        sudo apt-get install -y awscli # for AWS
+        # Replace with relevant commands for Azure, GCP, etc.
+
+    - name: Configure RDP Instance
+      run: |
+        # Configure credentials and create an RDP instance
+        aws ec2 run-instances --image-id ami-0123456789abcdef0 --count 1 --instance-type t2.micro --key-name YourKeyPair --security-group-ids sg-0123456789abcdef0 --subnet-id subnet-0123456789abcdef0
+        # Replace the above command with appropriate commands for your cloud provider
+
+    - name: Set up RDP
+      run: |
+        # Additional steps to configure RDP settings, if needed
+        # This might include installing RDP services and configuring firewall rules
+
+    - name: Output RDP Info
+      run: |
+        echo "RDP instance created successfully."
